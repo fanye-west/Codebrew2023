@@ -8,7 +8,7 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 3
+    Timeout: 10
     MemorySize: 128
 
 Resources:
@@ -26,12 +26,16 @@ Resources:
           Properties:
             Path: /hello
             Method: get
-  GetPerformance:
+  CardioPerformance:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: lambda_handlers/
-      Handler: app.lambda_handler
+      Handler: cardio_perf_handler.lambda_handler
       Runtime: python3.9
+      Layers:
+        - arn:aws:lambda:ap-southeast-2:336392948345:layer:AWSSDKPandas-Python39:5
+      Policies:
+        - AWSLambdaExecute
       Architectures:
         - x86_64
       Events:
@@ -39,6 +43,24 @@ Resources:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /cardio_performance
+            Method: get
+  PowerPerformance:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: lambda_handlers/
+      Handler: power_perf_handler.lambda_handler
+      Runtime: python3.9
+      Layers:
+        - arn:aws:lambda:ap-southeast-2:336392948345:layer:AWSSDKPandas-Python39:5
+      Policies:
+        - AWSLambdaExecute
+      Architectures:
+        - x86_64
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /strength_performance
             Method: get
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
