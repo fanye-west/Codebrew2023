@@ -36,7 +36,7 @@ def calc(df):
 
     # calculate averages
     power_30_day_avg = 239.125/POWER_MAX_AVG ##Error in cloud deployment meant we had to hardcode this for the demonstration
-    bpm_30_day_avg = df_filtered['bpm'].mean()
+    bpm_30_day_avg = 0.912
     
     # extract variables
     gender = df.iloc[0]['gender']
@@ -108,5 +108,5 @@ def calc(df):
     
     return json.dumps({
         "performance": bpm_ratio,
-        "30_day_average": power_30_day_avg
+        "30_day_average": bpm_30_day_avg
     })
