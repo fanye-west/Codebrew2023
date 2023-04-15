@@ -1,0 +1,60 @@
+openapi: 3.0.3
+info:
+  title: Swagger Petstore - OpenAPI 3.0
+  description: |-
+    This provides the API specifications for Ryde API to populate data on the front-end 
+  version: 0.1.0
+
+servers:
+  - url: https://9e6k4vqq5b.execute-api.ap-southeast-2.amazonaws.com/Prod/
+paths:
+  /hello:
+    get:
+      summary: test hello world of API
+      responses:
+        200: 
+          description: returns hello test
+          content: 
+            application/json:
+              schema: 
+                type: string
+                example: "hello"
+  /cardio_performance:
+    get:
+      summary: retrieves most recent data of the athletes cardio performance and their 30 day average
+      responses:
+        200: 
+          description: returns performance and 30 day average
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/performance_data_schema'   
+
+  /strength_performance:
+    get:
+      summary: retrieves most recent data of the athletes strength performance and their 30 day average
+      responses:
+        200: 
+          description: returns performance and 30 day average
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/performance_data_schema'  
+                
+                    
+components:
+  schemas:
+    performance_data_schema:
+      type: object
+      properties:
+        performance: 
+          type: number
+          description: percentage of potential cardio performance the athlete is at
+          example: 0.80
+        30_day_average:
+          type: number
+          description: percentage of potential cardio performance the athlete over a 30 day average 
+          example: 0.73
+      
+
+                
