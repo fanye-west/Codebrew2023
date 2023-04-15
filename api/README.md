@@ -1,4 +1,6 @@
-# sam-app
+# ryde-api built using AWS SAM (Serverless Application Model)
+
+This directory contains source code and code used to define and deploy AWS cloud resoruceses for our API.
 
 This project contains source code and supporting files for the Ryde serverless application that you can deploy with the SAM CLI. It includes the following files and folders.
 
